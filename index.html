@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Shopping Cart</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <!-- <link rel="stylesheet" href="assets/css/fontawesome.min.css"> -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous" />
+</head>
+
+<body>
+  <div class="row" id="app">
+    <div class="col-md-2 side-bar">
+      <div class="side">
+        <div class="shopping-cart-text">
+          <h3>{{ title }}</h3>
+        </div>
+        <hr class="small-line" />
+        <img src="assets/image/cart.png" height="200px" width="200px" />
+        <button type="button" class="btn btn-light" @click="changeView()">
+          View Shopping Cart
+        </button>
+        <hr class="small-line" />
+      </div>
+    </div>
+
+    <div class="col-md-10 full-bar">
+      <input class="xty form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+
+      <span class="fas fa-search"></span>
+      <hr />
+
+      <div class="empty-top" v-if="showShoppingCart === false"></div>
+      <div class="items" v-if="showShoppingCart === false">
+        <br />
+        <div class="item" v-for="item in storeItems">
+          <p>
+            Item name: {{ item.itemName }}
+            <span class="quantity"><label>Quantity:</label> <input v-model="item.quantity" type="text" /></span>
+          </p>
+          <p>Price: <span class="price">N{{ item.price }}</span></p>
+          <button class="add-cart" @click="addToCart(item)">Add to cart</button>
+          <hr />
+        </div>
+      </div>
+
+
+
+      <div class="empty-top" v-if="showShoppingCart === true"></div>
+      <div class="items" v-if="showShoppingCart === true">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="remove-button" scope="col">Item Name</th>
+              <th class="remove-button" scope="col">Price</th>
+              <th class="remove-button" scope="col">Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in cart">
+              <td>{{item.itemName}}</td>
+              <td>{{item.price}}</td>
+              <td>{{item.quantity}}</td>
+              <td class="remove-button"><button class="my-btn" @click="removeFromCart(item, index)">REMOVE</button></td>
+            </tr>
+           
+            
+
+          </tbody>
+        </table>
+        <h2>Total: {{ total }}</h2>
+      </div>
+
+    </div>
+  </div> 
+  </div>
+
+
+  
+
+
+
+  <script src="./assets/js/bootstrap.min.js"></script>
+  <script src="./assets/js/vue.js"></script>
+  <script src="./assets/js/main.js"></script>
+  <script src="./assets/js/challenge.js"></script>
+
+</body>
+
+</html>
